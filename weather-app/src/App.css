@@ -1,5 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1{
+  color: white;
+  margin-bottom: 30px;
+}
 .App {
   text-align: center;
+  background-size: cover;
+  margin-top: 30px;
 }
 
 .App-logo {

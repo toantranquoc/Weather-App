@@ -1,8 +1,12 @@
 import './App.css';
 import React, {Component} from 'react'
 import axios from 'axios'
-import DisplayWeather from './Components/DisplayWeather'
-import SearchBox from './Components/SearchBox'
+import DisplayWeather from './Components/DisplayWeather/DisplayWeather'
+import SearchBox from './Components/SearchBox/SearchBox'
+import NotFound from './Components/NotFound/NotFound'
+
+
+
 const API_Key = '08c9e11493ab1f2d38450a6b3e80d6de';
 
 class App extends Component {
@@ -10,14 +14,9 @@ class App extends Component {
     super();
     this.state = {
       unit: "metric",
-      temparature: "3",
-      city: "",
-      country: "",
-      humidity: "",
-      pressure: "",
-      icon:"",
-      description: "",
-      error: false
+      city: null,
+      error: true,
+      weather: {}
     }
   }
 
@@ -30,7 +29,7 @@ class App extends Component {
         const data = res.data;
         console.log(data);
         this.setState({
-          unit: data.unit,
+          weather: data,
           error: false
         })
       }).catch((error) => 
@@ -38,9 +37,7 @@ class App extends Component {
           error: true
         })
       );
-  
-    // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&units=${this.state.unit}&appid=${API_Key}`);
-    // const response = await api_call.json();
+
   }
   handleSearch =  value => {
     let temp = value.toString().replace(/\s/g, "");
@@ -51,12 +48,16 @@ class App extends Component {
   }
 
   render(){
-    let result = this.state.error ? <p>Tên thành phố không phù hợp! Vui lòng nhập lại</p> : <DisplayWeather/>
+    let result = null;
+    if(this.state.city != null) {
+      result = this.state.error ? <NotFound>Tên địa điểm không phù hợp!</NotFound> : <DisplayWeather weather={this.state.weather}/>
+    }
+
     return (
       <div className="App">
-        <h1> Dự báo thời tiết</h1>
-        {result}
+        <h1> DỰ BÁO THỜI TIẾT</h1>
         <SearchBox onSearch={this.handleSearch}></SearchBox>
+        {result}
       </div>
     );
   }
