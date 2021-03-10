@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {Button} from 'antd'
 import './DisplayWeather.css'
+import {Route, Link} from 'react-router-dom'
+
 const DisplayWeather = (props) => {
     const dateBuilder = (d) => {
         let months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
@@ -12,8 +15,10 @@ const DisplayWeather = (props) => {
     
         return `${day}, Ngày ${date} ${month} ${year}`
       }
+      let id = props.id;
     return (
-        <div>
+
+        <div className="container">
           <div className="location-box">
             <div className="location">{props.weather.name}, {props.weather.sys.country}</div>
             <div className="date">{dateBuilder(new Date())}</div>
@@ -25,6 +30,9 @@ const DisplayWeather = (props) => {
             </div>
             <div className="weather">{props.weather.weather[0].description}</div>
           </div>
+          <Button type="link" className="detail"><Link to={{
+            pathname: `/detail/${props.weather.id}`
+          }}>Nhấn để xem chi tiết</Link></Button>
         </div>
     );
 }

@@ -1,3 +1,13 @@
+
+.container{
+  border: 2px solid wheat;
+  width: 40%;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
 .location-box .location {
     color: #FFF;
     font-size: 32px;
@@ -49,4 +59,11 @@
     font-size: 48px;
     font-weight: 700;
     text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+  }
+  .detail {
+    font-weight: bold;
+  }
+  .detail:hover{
+    color: blue;
+
   }
