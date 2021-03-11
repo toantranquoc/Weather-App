@@ -23,7 +23,7 @@ class MainWeather extends Component{
           axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&lang=vi&units=${this.state.unit}&appid=${API_Key}`)
           .then(res => {
             const data = res.data;
-            console.log(data);
+            localStorage.setItem('idCountry', data.id);
             this.setState({
               weather: data,
               error: false
@@ -33,7 +33,6 @@ class MainWeather extends Component{
               error: true
             })
           );
-    
       }
       handleSearch =  value => {
         let temp = value.toString().replace(/\s/g, "");
@@ -48,7 +47,7 @@ class MainWeather extends Component{
           result = this.state.error ? <NotFound>Tên địa điểm không phù hợp!</NotFound> : <DisplayWeather weather={this.state.weather}/>
         }
         return(
-            <div className="App">
+            <div className="MainWeather">
                 <h1> DỰ BÁO THỜI TIẾT</h1>
                 <SearchBox onSearch={this.handleSearch}></SearchBox>
                 {result}

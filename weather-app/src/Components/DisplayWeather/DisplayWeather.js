@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Button} from 'antd'
 import './DisplayWeather.css'
-import {Route, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const DisplayWeather = (props) => {
     const dateBuilder = (d) => {
@@ -17,7 +17,6 @@ const DisplayWeather = (props) => {
       }
       let id = props.id;
     return (
-
         <div className="container">
           <div className="location-box">
             <div className="location">{props.weather.name}, {props.weather.sys.country}</div>
