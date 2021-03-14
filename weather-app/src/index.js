@@ -4,8 +4,15 @@ import {BrowserRouter} from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import weatherReducer from './store/reducer'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const store = createStore(weatherReducer);
 const app = <BrowserRouter>
-      <App />
+<Provider store={store}>
+<App />
+</Provider>
 </BrowserRouter>
 
 ReactDOM.render(

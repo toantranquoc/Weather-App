@@ -8,6 +8,19 @@
   align-items: center;
   position: relative;
 }
+.container button {
+  background-color: white;
+  color: black;
+  width: 200px;
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.container button:hover{
+  background-color: royalblue;
+  color: white;
+}
 .location-box .location {
     color: #FFF;
     font-size: 32px;
@@ -59,11 +72,4 @@
     font-size: 48px;
     font-weight: 700;
     text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
-  }
-  .detail {
-    font-weight: bold;
-  }
-  .detail:hover{
-    color: blue;
-
   }

@@ -2,11 +2,25 @@
     text-align: center;
     color: aliceblue;
 }
+.displayweather button {
+  background-color: red;
+  color: white;
+  width: 10%;
+  height: 30px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.displayweather button:hover{
+  background-color: aliceblue;
+  color: black;
+}
 .displayweather {
     margin-top: 20px;
     display: flex;
     flex-flow: column nowrap;
     box-sizing: border-box;
+    align-items: center;
   }
   
   .displayweather .maincard {
@@ -75,8 +89,14 @@
   .displayweather .weatherdetails .section1 {
     justify-self: right;
     width: 300px;
+    margin-top: 20px;
+    padding: auto;
   }
-  
+  .displayweather .weatherdetails .section2 {
+    width: 300px;
+    margin-top: 20px;
+    padding: auto;
+  }
   h4 {
     text-align: left;
     margin-right: 30px;
@@ -85,6 +105,8 @@
   
   td {
     border-bottom: 2px dashed grey;
+    color: white;
+    font-size: 20px;
   }
   
   .displayweather .weatherdetails span {

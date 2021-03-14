@@ -2,6 +2,7 @@ import React from 'react'
 import {Button} from 'antd'
 import './DisplayWeather.css'
 import {Link} from 'react-router-dom'
+import {RightCircleOutlined} from '@ant-design/icons';
 
 const DisplayWeather = (props) => {
     const dateBuilder = (d) => {
@@ -29,7 +30,7 @@ const DisplayWeather = (props) => {
             </div>
             <div className="weather">{props.weather.weather[0].description}</div>
           </div>
-          <Button type="link" className="detail"><Link to={{
+          <Button icon={<RightCircleOutlined/>}><Link to={{
             pathname: `/detail/${props.weather.id}`
           }}>Nhấn để xem chi tiết</Link></Button>
         </div>

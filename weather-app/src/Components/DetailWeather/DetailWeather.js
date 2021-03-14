@@ -1,24 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux'
 import './DetailWeather.css'
-import axios from 'axios'
+import { LeftOutlined } from '@ant-design/icons';
+import { Button} from 'antd';
 
-const API_Key = '08c9e11493ab1f2d38450a6b3e80d6de';
+const DetailWeather = (props) => {
 
-const DetailWeather = () => {
-    const [weather, setWeather] = useState({});
-    useEffect(() => {
-        const id = localStorage.getItem('idCountry');
-        console.log(id);
-        const getWeatherData = async () => {
-            axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${id}&lang=vi&units=metric&appid=${API_Key}`)
-            .then(res => {
-              const data = res.data;
-              setWeather(data);  
-            })
-        }
-        getWeatherData();
+    const weather = useSelector(state => state.weather);
 
-    }, [weather]);
+    const onClickBackHandler = () => {
+      props.history.goBack();
+    }
 
     return (
       <div className="displayweather">
@@ -26,13 +18,13 @@ const DetailWeather = () => {
             <span className="cardtitle">
               <h2>{weather.name} , {weather.sys.country}</h2>
             </span>
-            <h1>
+            <h1 style={{color: 'red'}}>
               {" "}
               {Math.floor(weather.main.temp)}
               <sup>o</sup>C
             </h1>
             <span className="weather-main">{weather.weather[0].main}</span>
-            <img className="weather-icon" src={null} alt="" srcset="" />
+            <img className="weather-icon" src={"http://openweathermap.org/img/w/" +`${weather.weather[0].icon}` +".png"} alt="Thời tiết"/>
             <span className="weather-description">
               {" "}
               {weather.weather[0].description}
@@ -43,7 +35,7 @@ const DetailWeather = () => {
               <table>
                 <tr>
                   <td>
-                    <h4>Nhiệt độ cao nhất/Thấp nhất</h4>
+                    <h4>Cao nhất/Thấp nhất</h4>
                   </td>
                   <td>
                     <span>
@@ -71,7 +63,7 @@ const DetailWeather = () => {
                 </tr>
                 <tr>
                   <td>
-                    <h4>Tầm nhìn: </h4>
+                    <h4>Tầm nhìn </h4>
                   </td>
                   <td>
                     <span>{weather.visibility / 1000} Km</span>
@@ -103,7 +95,7 @@ const DetailWeather = () => {
                 </tr>
                 <tr>
                   <td>
-                    <h4>Bình Minh: </h4>
+                    <h4>Bình Minh </h4>
                   </td>
                   <td>
                     <span>
@@ -113,7 +105,7 @@ const DetailWeather = () => {
                 </tr>
                 <tr>
                   <td>
-                    <h4>Hoàng Hôn:</h4>
+                    <h4>Hoàng Hôn</h4>
                   </td>
                   <td>
                     <span>
@@ -124,6 +116,10 @@ const DetailWeather = () => {
               </table>
             </div>
           </div>
+
+          <Button onClick={onClickBackHandler} type="primary" icon={<LeftOutlined />}>
+            Về trang chủ
+          </Button>
         </div>
     );
 }

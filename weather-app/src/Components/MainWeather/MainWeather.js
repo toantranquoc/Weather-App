@@ -4,6 +4,7 @@ import SearchBox from '../SearchBox/SearchBox'
 import NotFound from '../NotFound/NotFound'
 import axios from 'axios'
 import './MainWeather.css'
+import {connect} from 'react-redux'
 const API_Key = '08c9e11493ab1f2d38450a6b3e80d6de';
 class MainWeather extends Component{
     constructor(){
@@ -23,12 +24,15 @@ class MainWeather extends Component{
           axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&lang=vi&units=${this.state.unit}&appid=${API_Key}`)
           .then(res => {
             const data = res.data;
-            localStorage.setItem('idCountry', data.id);
             this.setState({
               weather: data,
               error: false
             })
-          }).catch((error) => 
+          })
+          .then(() => {
+            this.props.onGetWeatherData(this.state.weather)
+          })
+          .catch((error) => 
             this.setState({
               error: true
             })
@@ -39,7 +43,6 @@ class MainWeather extends Component{
         this.setState({
           city: temp
         }, () => this.getWeather());
-        console.log(this.state);
       }
     render(){
         let result = null;
@@ -56,4 +59,16 @@ class MainWeather extends Component{
         );
     }
 }
-export default MainWeather;
+const mapStateToProps = (state) => {
+      return {
+        weatherState: state.weather
+      }
+}
+
+const mapDispatchToProps = (dispatch) => {
+      return {
+          onGetWeatherData: (data) => dispatch({type: 'GET_WEATHER', weather: data})
+      };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainWeather);
